@@ -14,5 +14,9 @@ router.post("/", async (res,resp)=>{
         resp.status(500).json(error)
     }
 })
+//UPDATE
+//DELETE
+//GET
+//GET ALL
 
 export default router
