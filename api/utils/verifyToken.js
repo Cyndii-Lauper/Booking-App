@@ -16,8 +16,19 @@ export const verifyToken = (res, resp, next) => {
 
 export const verifyUser = (res, resp, next) => {
     // If the user is already verified go to the next middleware function
-    verifyToken(res,resp, () => {
+    verifyToken(res,resp,next, () => {
         if(res.user.id === res.params.id || res.user.isAdmin){
+            next();
+        } else {
+            if (err) return next(createError(403, "You are not authorized"));
+        }
+    })
+};
+
+export const verifyAdmin = (res, resp, next) => {
+    // If the user is already verified go to the next middleware function
+    verifyToken(res,resp, next, () => {
+        if(res.user.isAdmin){
             next();
         } else {
             if (err) return next(createError(403, "You are not authorized"));
